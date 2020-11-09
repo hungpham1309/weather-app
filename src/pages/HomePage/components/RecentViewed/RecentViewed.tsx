@@ -2,6 +2,7 @@ import { SmileOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, Result, Tag } from "antd";
 import Box from "components/base/Box";
 import React from "react";
+import { Link } from "react-router-dom";
 import { ISearchLocation } from "services/typings/location";
 import { useTheme } from "themes/useTheme";
 
@@ -42,15 +43,16 @@ const RecentViewed: React.FC<Props> = (props) => {
       </Box>
       <Box display={"flex"} flexWrap="wrap">
         {data?.map((location) => (
-          <Tag
-            key={location.woeid}
-            closable
-            onClose={() => onClear(location.woeid)}
-            color={themeVariables.colors.primary}
-            style={{ marginBottom: 8 }}
-          >
-            {location.title}
-          </Tag>
+          <Link to={`/weather/${location.woeid}`} key={location.woeid}>
+            <Tag
+              closable
+              onClose={() => onClear(location.woeid)}
+              color={themeVariables.colors.primary}
+              style={{ marginBottom: 8 }}
+            >
+              {location.title}
+            </Tag>
+          </Link>
         ))}
       </Box>
     </Box>

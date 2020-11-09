@@ -1,5 +1,5 @@
-import React from "react";
-import { Layout } from "antd";
+import React, { Suspense } from "react";
+import { Layout, Spin } from "antd";
 import { keyframes } from "styled-components";
 import Navbar from "../components/Navbar";
 import { renderRoutes } from "../utils/route";
@@ -17,7 +17,9 @@ const MainLayout = (props: IProps) => {
     <Container>
       <Navbar />
       <Box mx={[1, 7, 8, 9]} backgroundColor="base">
-        <Main>{renderRoutes(route?.routes)}</Main>
+        <Suspense fallback={<Spin spinning><Box width={1} height={500}/></Spin>}>
+          <Main>{renderRoutes(route?.routes)}</Main>
+        </Suspense>
       </Box>
     </Container>
   );
